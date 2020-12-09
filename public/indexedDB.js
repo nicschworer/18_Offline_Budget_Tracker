@@ -1,10 +1,13 @@
 const indexedDB = 
-    window.indexedDB ||
-    window.mozIndexedDB ||
-    window.webkitIndexedDB ||
-    window.msIndexedDB ||
-    window.shimIndexedDB;
-    
+window.indexedDB ||
+window.mozIndexedDB ||
+window.webkitIndexedDB ||
+window.msIndexedDB ||
+window.shimIndexedDB;
+
+// create budget db + bulk (pending) collection into indexedDB
+// saveRecord -> save to indexedDB
+// listen to when we are back online and send records
 
 let db;
 const request = indexedDB.open('budget', 1);
@@ -22,13 +25,11 @@ request.onsuccess = ({ target }) => {
 };
 
 request.onerror = function(event) {
-    console.log(event.request)
+    console.log("error")
+    // saveRecord(event);
+
 };
 
-
-// create budget db + bulk (pending) collection into indexedDB
-// saveRecord -> save to indexedDB
-// listen to when we are back online and send records
 
 
 function saveRecord (record) {
